@@ -43,4 +43,8 @@ defmodule PraxisWeb.PatientLive.Index do
   defp list_patients do
     Patients.list_patients()
   end
+
+  def patient_initials(%Patient{} = patient) do
+    "#{String.at(patient.first_name, 0)}#{String.at(patient.last_name, 0)}"
+  end
 end

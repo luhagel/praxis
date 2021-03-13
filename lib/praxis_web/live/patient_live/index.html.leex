@@ -12,7 +12,7 @@
     <div class="card shadow">
       <div class="card-header">
         <h5 class="card-title">
-          Listing Patients
+          Patients
         </h5>
         <%= live_patch to: Routes.patient_index_path(@socket, :new), class: "btn btn-icon btn-sm btn-light" do %>
           <svg fill="currentColor" width="24" height="24" viewBox="0 0 20 20" stroke-width="2"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
@@ -33,15 +33,15 @@
           <tbody id="patients">
             <%= for patient <- @patients do %>
             <tr id="patient-<%= patient.id %>">
-              <td><div class="avatar"><img src="<%= patient.avatar_url %>" width="48" height="48"></img></div></td>
+              <td><div class="avatar"><%= patient_initials(patient) %></div></td>
               <td><%= patient.first_name %></td>
               <td><%= patient.last_name %></td>
-              <td><%= patient.date_of_birth %></td>
+              <td><code><%= patient.date_of_birth %></code></td>
 
               <td class="text-right">
-                <span><%= live_redirect "Show", to: Routes.patient_show_path(@socket, :show, patient) %></span>
-                <span><%= live_patch "Edit", to: Routes.patient_index_path(@socket, :edit, patient) %></span>
-                <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: patient.id, data: [confirm: "Are you sure?"] %></span>
+                <span><%= live_redirect "Show", to: Routes.patient_show_path(@socket, :show, patient), class: "btn btn-outline-primary" %></span>
+                <span><%= live_patch "Edit", to: Routes.patient_index_path(@socket, :edit, patient), class: "btn btn-outline-secondary" %></span>
+                <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: patient.id, data: [confirm: "Are you sure?"], class: "btn btn-outline-danger" %></span>
               </td>
             </tr>
             <% end %>
