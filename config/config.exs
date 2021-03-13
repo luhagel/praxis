@@ -27,9 +27,9 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :kaffy,
-   otp_app: :praxis,
-   ecto_repo: Praxis.Repo,
-   router: PraxisWeb.Router
+  otp_app: :praxis,
+  ecto_repo: Praxis.Repo,
+  router: PraxisWeb.Router
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

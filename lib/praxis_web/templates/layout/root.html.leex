@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%= csrf_meta_tag() %>
-    <%= live_title_tag assigns[:page_title] || "Praxis", suffix: " · Phoenix Framework" %>
+    <%= live_title_tag assigns[:page_title] || "Praxis", suffix: " · Patient Management" %>
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
@@ -13,11 +13,12 @@
     <header class="fixed top-0 left-0 right-0 z-30 px-2 py-4 bg-white shadow sm:px-4">
       <div class="container flex items-center justify-between mx-auto">
         <a href="/" title="Praxis Home Page" class="flex items-center text-xl text-gray-900">
-          Praxis
+          Praxis Management
         </a>
         <div class="flex items-center space-x-1">
           <div class="hidden md:inline-flex space-x-1">
             <%= link "Home", to: Routes.page_path(@conn, :index), class: "btn btn-sm btn-link" %>
+            <%= link "Patients", to: Routes.patient_index_path(@conn, :index), class: "btn btn-sm btn-link" %>
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
               <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "btn btn-sm btn-link" %>
             <% end %>
@@ -76,7 +77,7 @@
 
     <footer class="py-6 mt-auto text-gray-600 bg-gray-800 footer">
       <div class="container max-w-6xl px-4 mx-auto">
-        <span class="text-muted">Praxis</span>
+        <span class="text-muted">Praxis - Copyright 2021 Luca Hagel</span>
       </div>
     </footer>
   </body>

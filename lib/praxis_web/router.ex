@@ -1,6 +1,7 @@
 defmodule PraxisWeb.Router do
   use PraxisWeb, :router
-  use Kaffy.Routes #, scope: "/admin", pipe_through: [:some_plug, :authenticate]
+  # , scope: "/admin", pipe_through: [:some_plug, :authenticate]
+  use Kaffy.Routes
 
   import PraxisWeb.UserAuth
 
@@ -75,5 +76,16 @@ defmodule PraxisWeb.Router do
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :confirm
+  end
+
+  scope "/", PraxisWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    live "/patients", PatientLive.Index, :index
+    live "/patients/new", PatientLive.Index, :new
+    live "/patients/:id/edit", PatientLive.Index, :edit
+
+    live "/patients/:id", PatientLive.Show, :show
+    live "/patients/:id/show/edit", PatientLive.Show, :edit
   end
 end

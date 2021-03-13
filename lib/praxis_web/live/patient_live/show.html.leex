@@ -1,0 +1,47 @@
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, PraxisWeb.PatientLive.FormComponent,
+    id: @patient.id,
+    title: @page_title,
+    action: @live_action,
+    patient: @patient,
+    return_to: Routes.patient_show_path(@socket, :show, @patient) %>
+<% end %>
+
+<div class="flex flex-wrap">
+  <div class="w-full md:w-2/3">
+    <div class="card shadow">
+      <div class="card-header">
+        <h5 class="card-title">
+          Show Patient
+        </h5>
+      </div>
+      <div class="card-body prose">
+
+        <div>
+          <strong>First name:</strong>
+          <%= @patient.first_name %>
+        </div>
+
+        <div>
+          <strong>Last name:</strong>
+          <%= @patient.last_name %>
+        </div>
+
+        <div>
+          <strong>Avatar url:</strong>
+          <%= @patient.avatar_url %>
+        </div>
+
+        <div>
+          <strong>Date of birth:</strong>
+          <%= @patient.date_of_birth %>
+        </div>
+
+      </div>
+      <div class="card-footer">
+        <%= live_patch "Edit", to: Routes.patient_show_path(@socket, :edit, @patient), class: "btn btn-link btn-sm" %>
+        <%= live_redirect "Back", to: Routes.patient_index_path(@socket, :index), class: "btn btn-link btn-sm" %>
+      </div>
+    </div>
+  </div>
+</div>

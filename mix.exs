@@ -35,12 +35,10 @@ defmodule Praxis.MixProject do
     [
       # Kaffy administration
       {:kaffy, "~> 0.9.0"},
-
       {:bcrypt_elixir, "~> 2.0"},
       {:phx_gen_auth, "~> 0.6", only: [:dev], runtime: false},
       {:sobelow, "~> 0.8", only: :dev},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
-
       {:phoenix, "~> 1.5.7"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
