@@ -39,9 +39,9 @@
               <td><code><%= patient.date_of_birth %></code></td>
 
               <td class="text-right">
-                <span><%= live_redirect "Show", to: Routes.patient_show_path(@socket, :show, patient), class: "btn btn-outline-primary" %></span>
-                <span><%= live_patch "Edit", to: Routes.patient_index_path(@socket, :edit, patient), class: "btn btn-outline-secondary" %></span>
-                <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: patient.id, data: [confirm: "Are you sure?"], class: "btn btn-outline-danger" %></span>
+                <span><%= live_redirect "Show", to: Routes.patient_show_path(@socket, :show, patient), class: "btn btn-sm btn-outline-primary" %></span>
+                <span><%= live_patch "Edit", to: Routes.patient_index_path(@socket, :edit, patient), class: "btn btn-sm btn-outline-secondary" %></span>
+                <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: patient.id, data: [confirm: "Are you sure?"], class: "btn btn-sm btn-outline-danger" %></span>
               </td>
             </tr>
             <% end %>
