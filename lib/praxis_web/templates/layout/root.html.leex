@@ -9,79 +9,49 @@
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
-  <body class="flex flex-col h-full pt-32 bg-gray-100">
+  <body>
   <section class="min-h-screen bg-gray-50" x-data="{ sideBar: false }">
       <nav
         class="fixed top-0 left-0 z-20 h-full pb-10 overflow-x-hidden overflow-y-auto transition origin-left transform bg-gray-900 w-60 md:translate-x-0"
         :class="{ '-translate-x-full' : !sideBar, 'translate-x-0' : sideBar }"
         @click.away="sideBar = false"
       >
-        <a href="/" title="Praxis Home Page" class="flex items-center text-xl text-gray-900">
+        <a href="/" title="Praxis Home Page" class="flex items-center px-4 py-5 text-white">
           Praxis Management
         </a>
+        <nav class="text-sm font-medium text-gray-500" aria-label="Main Navigation">
+          <%= link "Home", to: Routes.page_path(@conn, :index), class: "flex items-center px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200" %>
+          <%= link "Patients", to: Routes.patient_index_path(@conn, :index), class: "flex items-center px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200" %>
+          <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+            <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "flex items-center px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200" %>
+          <% end %>
+        </nav>
       </nav>
     <div class="ml-0 transition md:ml-60">
     <header class="flex items-center justify-between w-full px-4 h-14">
-      <div class="container flex items-center justify-between mx-auto">
-        <a href="/" title="Praxis Home Page" class="flex items-center text-xl text-gray-900">
-          Praxis Management
+      <button class="block btn btn-light-secondary md:hidden" @click.stop="sideBar = true">
+        <span class="sr-only">Menu</span>
+        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path
+            fill-rule="evenodd"
+            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </button>
+      <div class="hidden -ml-3 form-icon md:block w-96">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input class="bg-transparent border-0 form-input" placeholder="Search for patients..." />
+      </div>
+      <div class="flex items-center">
+        <a href="#" class="flex text-gray-500">
+          <svg class="flex-shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+          </svg>
         </a>
-        <div class="flex items-center space-x-1">
-          <div class="hidden md:inline-flex space-x-1">
-            <%= link "Home", to: Routes.page_path(@conn, :index), class: "btn btn-sm btn-link" %>
-            <%= link "Patients", to: Routes.patient_index_path(@conn, :index), class: "btn btn-sm btn-link" %>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "btn btn-sm btn-link" %>
-            <% end %>
-          </div>
-          <%= render "_user_menu.html", assigns %>
-          <div class="inline-flex md:hidden" x-data="{ open: false }">
-            <button class="flex-none px-2 btn btn-link btn-sm" @click="open = true">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                >
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-              </svg>
-              <span class="sr-only">Open Menu</span>
-            </button>
-            <div class="absolute top-0 left-0 right-0 z-50 flex flex-col p-2 pb-4 m-2 bg-white rounded shadow space-y-3" x-show.transition="open" @click.away="open = false" x-cloak>
-              <button class="self-end flex-none px-2 ml-2 btn btn-link btn-icon" @click="open = false">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                  >
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-                <span class="sr-only">Close Menu</span>
-              </button>
-              <%= link "Home", to: Routes.page_path(@conn, :index), class: "btn btn-link w-full" %>
-              <%= link "Patients", to: Routes.patient_index_path(@conn, :index), class: "btn btn-sm btn-link" %>
-              <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-                <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "btn btn-link w-full" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
+        <%= render "_user_menu.html", assigns %>
       </div>
     </header>
     <div class="p-4">
