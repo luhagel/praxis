@@ -10,7 +10,18 @@
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body class="flex flex-col h-full pt-32 bg-gray-100">
-    <header class="fixed top-0 left-0 right-0 z-30 px-2 py-4 bg-white shadow sm:px-4">
+  <section class="min-h-screen bg-gray-50" x-data="{ sideBar: false }">
+      <nav
+        class="fixed top-0 left-0 z-20 h-full pb-10 overflow-x-hidden overflow-y-auto transition origin-left transform bg-gray-900 w-60 md:translate-x-0"
+        :class="{ '-translate-x-full' : !sideBar, 'translate-x-0' : sideBar }"
+        @click.away="sideBar = false"
+      >
+        <a href="/" title="Praxis Home Page" class="flex items-center text-xl text-gray-900">
+          Praxis Management
+        </a>
+      </nav>
+    <div class="ml-0 transition md:ml-60">
+    <header class="flex items-center justify-between w-full px-4 h-14">
       <div class="container flex items-center justify-between mx-auto">
         <a href="/" title="Praxis Home Page" class="flex items-center text-xl text-gray-900">
           Praxis Management
@@ -73,13 +84,12 @@
         </div>
       </div>
     </header>
-
-    <%= @inner_content %>
-
-    <footer class="py-6 mt-auto text-gray-600 bg-gray-800 footer">
-      <div class="container max-w-6xl px-4 mx-auto">
-        <span class="text-muted">Praxis - Copyright 2021 Luca Hagel</span>
-      </div>
-    </footer>
+    <div class="p-4">
+      <%= @inner_content %>
+    </div>
+    </div>
+    <!-- Sidebar Backdrop -->
+    <div class="fixed inset-0 z-10 w-screen h-screen bg-black bg-opacity-25 md:hidden" x-show.transition="sideBar" x-cloak></div>
+    </section>
   </body>
 </html>
