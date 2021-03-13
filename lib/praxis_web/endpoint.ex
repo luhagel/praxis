@@ -14,7 +14,11 @@ defmodule PraxisWeb.Endpoint do
     websocket: true,
     longpoll: false
 
-  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+  socket "/live", Phoenix.LiveView.Socket,
+    websocket: [
+      connect_info: [session: @session_options],
+      check_origin: ["http://localhost:4000", "https://praxis.luhagel.com"]
+    ]
 
   plug Plug.Static,
     at: "/kaffy",
