@@ -5,6 +5,8 @@ defmodule PraxisWeb.PatientLiveTest do
 
   alias Praxis.Patients
 
+  setup :register_and_log_in_user
+
   @create_attrs %{
     avatar_url: "some avatar_url",
     date_of_birth: ~D[2010-04-17],
@@ -49,7 +51,7 @@ defmodule PraxisWeb.PatientLiveTest do
 
       assert index_live
              |> form("#patient-form", patient: @invalid_attrs)
-             |> render_change() =~ "can&apos;t be blank"
+             |> render_change() =~ "can&#39;t be blank"
 
       {:ok, _, html} =
         index_live
@@ -71,7 +73,7 @@ defmodule PraxisWeb.PatientLiveTest do
 
       assert index_live
              |> form("#patient-form", patient: @invalid_attrs)
-             |> render_change() =~ "can&apos;t be blank"
+             |> render_change() =~ "can&#39;t be blank"
 
       {:ok, _, html} =
         index_live
@@ -111,7 +113,7 @@ defmodule PraxisWeb.PatientLiveTest do
 
       assert show_live
              |> form("#patient-form", patient: @invalid_attrs)
-             |> render_change() =~ "can&apos;t be blank"
+             |> render_change() =~ "can&#39;t be blank"
 
       {:ok, _, html} =
         show_live
