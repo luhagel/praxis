@@ -86,5 +86,5 @@ jobs:
           with:
             GIGALIXIR_USERNAME: ${{ secrets.GIGALIXIR_USERNAME }}
             GIGALIXIR_PASSWORD: ${{ secrets.GIGALIXIR_PASSWORD }}
-            GIGALIXIR_APP: <your app name>
-            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            GIGALIXIR_APP: praxis
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_SECRET }}
