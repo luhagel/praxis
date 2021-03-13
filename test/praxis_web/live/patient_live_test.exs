@@ -38,7 +38,7 @@ defmodule PraxisWeb.PatientLiveTest do
       {:ok, _index_live, html} = live(conn, Routes.patient_index_path(conn, :index))
 
       assert html =~ "Listing Patients"
-      assert html =~ patient.avatar_url
+      assert html =~ patient.last_name
     end
 
     test "saves new patient", %{conn: conn} do
@@ -60,7 +60,7 @@ defmodule PraxisWeb.PatientLiveTest do
         |> follow_redirect(conn, Routes.patient_index_path(conn, :index))
 
       assert html =~ "Patient created successfully"
-      assert html =~ "some avatar_url"
+      assert html =~ "some last_name"
     end
 
     test "updates patient in listing", %{conn: conn, patient: patient} do
@@ -82,7 +82,7 @@ defmodule PraxisWeb.PatientLiveTest do
         |> follow_redirect(conn, Routes.patient_index_path(conn, :index))
 
       assert html =~ "Patient updated successfully"
-      assert html =~ "some updated avatar_url"
+      assert html =~ "some updated last_name"
     end
 
     test "deletes patient in listing", %{conn: conn, patient: patient} do
@@ -100,7 +100,7 @@ defmodule PraxisWeb.PatientLiveTest do
       {:ok, _show_live, html} = live(conn, Routes.patient_show_path(conn, :show, patient))
 
       assert html =~ "Show Patient"
-      assert html =~ patient.avatar_url
+      assert html =~ patient.last_name
     end
 
     test "updates patient within modal", %{conn: conn, patient: patient} do
@@ -122,7 +122,7 @@ defmodule PraxisWeb.PatientLiveTest do
         |> follow_redirect(conn, Routes.patient_show_path(conn, :show, patient))
 
       assert html =~ "Patient updated successfully"
-      assert html =~ "some updated avatar_url"
+      assert html =~ "some updated last_name"
     end
   end
 end
